@@ -3,6 +3,8 @@
 #ifndef R2_CBM_DIS_H
 #define R2_CBM_DIS_H
 
+#include <r_util.h>
+
 // see https://www.c64-wiki.com/wiki/BASIC_token
 
 typedef enum {
@@ -83,5 +85,7 @@ typedef enum {
 	R_CBM_BASIC_TOKEN_FCN_MID$ = 0xCA,
 	R_CBM_BASIC_TOKEN_CMD_GO = 0xCB
 } RCBMBasicToken;
+
+R_API size_t r_cbm_basic_disassemble(R_OUT RStrBuf *out, RBuffer *buf);
 
 #endif //R2_CBM_DIS_H

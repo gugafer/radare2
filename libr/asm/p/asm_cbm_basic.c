@@ -9,8 +9,12 @@ static int disassemble(RAsm *a, RAsmOp *op, const ut8 *buf, int len) {
 	if (!len) {
 		return 0;
 	}
-	r_strbuf_setf (&op->buf_asm, "cbm 0x%02x", (unsigned int)buf[0]);
-	op->size = 1;
+	RBuffer *buffer = r_buf_new_with_bytes (buf, len);
+	if (!buffer) {
+		return 0; // TODO: -1 or something?
+	}
+	op->size = r_cbm_basic_disassemble (&op->buf_asm, buffer);
+	r_buf_free (buffer);
 	return op->size;
 }
 
