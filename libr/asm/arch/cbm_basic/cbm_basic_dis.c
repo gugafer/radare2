@@ -88,7 +88,8 @@ static const char *token_str(ut8 b) {
 
 R_API size_t r_cbm_basic_disassemble(R_OUT RStrBuf *out, RBuffer *buf) {
 	ut64 pos = 0;
-	ut16 next_op_addr = r_buf_read_le16_at (buf, pos += 2);
+	ut16 next_op_addr = r_buf_read_le16_at (buf, pos);
+	pos += 2;
 	if (next_op_addr == UT16_MAX) {
 		return pos;
 	}
@@ -98,7 +99,8 @@ R_API size_t r_cbm_basic_disassemble(R_OUT RStrBuf *out, RBuffer *buf) {
 		return pos;
 	}
 
-	ut64 line_num = r_buf_read_le16_at (buf, pos += 2);
+	ut64 line_num = r_buf_read_le16_at (buf, pos);
+	pos += 2;
 	if (line_num == UT16_MAX) {
 		return pos;
 	}
